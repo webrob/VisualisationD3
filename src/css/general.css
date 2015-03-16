@@ -3,3 +3,60 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-size: 12px;
 }
+
+#resultsDiv {
+    font-size: 20px;
+}
+
+#results {
+    color: #1700ff;
+}
+
+#legend2 {
+    width: 150px;
+    margin-left: 20px;
+}
+
+
+#green, #red, #blue {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin-right: 2px;
+}
+
+#green {
+    background-color: #00ff00;
+}
+
+#red {
+    background-color: #ff0000;
+}
+
+#blue {
+    background-color: #1700ff;
+}
+
+.legendField {
+    font-size: 12px;
+    width: 250px;
+    height: 25px;
+}
+
+.bigSpace {
+    width: 200px;
+    font-size: 14px;
+
+}
+
+#border {
+    border: 1px solid;
+}
+
+#together {
+    font-size: 12px;
+}
+
+#tableResults {
+    height: 200px;
+}

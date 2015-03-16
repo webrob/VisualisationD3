@@ -1,4 +1,4 @@
-function EventSeriesVisualization(jsonData, plannedType,markType) {
+function EventSeriesVisualization(jsonData, plannedType, markType) {
     this.jsonData = jsonData;
     this.markType = markType;
     this.plannedType = plannedType;
@@ -83,9 +83,21 @@ function EventSeriesVisualization(jsonData, plannedType,markType) {
 
     EventSeriesVisualization.prototype.createGraph = function () {
         var _this = this;
+
+        var startDate = $(".start").text();
+        if (startDate == "")
+        {
+            startDate = "1992-12-21";
+        }
+        var endDate = $(".end").text();
+        if (endDate == "")
+        {
+            endDate = "2013-03-31";
+        }
+
         _this.graph = d3.chart.eventDrops()
-            .start(new Date("1992-12-21"))
-            .end(new Date("2013-03-31"))
+            .start(new Date(startDate))
+            .end(new Date(endDate))
             .minScale(1)
             .maxScale(1000)
             .eventColor(function (datum, j) {

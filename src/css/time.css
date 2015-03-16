@@ -13,20 +13,24 @@ body {
 }
 
 #firstVisualisation {
-    width:1200px;
-    margin:0 auto;
+    width: 1200px;
+    margin: 0 auto;
 }
-.start, .end{
+
+.start, .end {
     font-weight: bold;
     padding: 15px;
     font-size: 14px;
 }
+
 .domain {
     fill: #3493B0;
 }
+
 .x-axis {
     font-size: 10px;
 }
+
 .bar {
     fill: steelblue;
 }
@@ -34,10 +38,12 @@ body {
 .bar:hover {
     fill: brown;
 }
-.line > text{
+
+.line > text {
     fill: #000000 !important;
-    font-size:14px;
+    font-size: 14px;
 }
+
 .axis {
     font: 10px sans-serif;
 }
@@ -52,54 +58,57 @@ body {
 .x.axis path {
     display: none;
 }
+
 .Heading {
     text-align: center;
 }
+
 .Box {
     background: rgba(239, 235, 228, 0.5);
     border: 1px solid rgba(51, 51, 51, 0.16);
     padding: 15px;
     border-radius: 3px;
-    margin:25px;
+    margin: 25px;
 }
+
 .InnerBox {
     border: 1px solid rgba(51, 51, 51, 0.16);
     padding: 15px;
     border-radius: 1px;
-    margin:20px;
+    margin: 20px;
 }
+
 fieldset {
     border: 1px;
     border-top: 1px solid #B5B8B6;
     font-size: 11px;
-    width:200px;
-    float:left;
+    width: 200px;
+    float: left;
 }
+
 #fieldsetContainer {
     width: 855px;
     margin: 0 auto;
 }
 
+/*
 #timeFilter, #costFilter {
     width: 300px
 }
-#legend2{
+*/
+
+/*
+#legend2 {
     width: 150px;
     margin-left: 20px;
 }
+*/
 
 #green, #red, #blue {
-    float:left;
-    width:20px;
-    height:20px;
+    float: left;
+    width: 20px;
+    height: 20px;
     margin-right: 2px;
-}
-
-#Green, #Red , #Grey{
-    margin-top:4px;
-    margin-bottom:4px;
-    width: 115px;
-    float:left;
 }
 
 #green {
@@ -107,23 +116,17 @@ fieldset {
 }
 
 #red {
-    background-color:#ff0000;
+    background-color: #ff0000;
 }
 
 #blue {
     background-color: #1700ff;
 }
 
-#tooltiptime {
-    background-color: white;
-    padding: 3px 5px;
-    border: 1px solid black;
-    text-align: center;
-}
-
+/*
 .legendField {
     font-size: 12px;
-    width: 300px;
+    width: 250px;
     height: 25px;
 }
 
@@ -132,16 +135,17 @@ fieldset {
     font-size: 14px;
 
 }
+*/
 
 #legendForFirstVis {
 
     padding: 20px;
     justify-content: center;
-    float:right;
+    float: right;
 }
 
 #together {
     font-size: 12px;
     border: 1px dashed;
-   padding: 5px;
+    padding: 5px;
 }
