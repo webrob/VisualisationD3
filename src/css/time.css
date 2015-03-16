@@ -12,7 +12,7 @@ body {
     color: #1700ff;
 }
 
-#firstContainer {
+#firstVisualisation {
     width:1200px;
     margin:0 auto;
 }
@@ -72,7 +72,7 @@ fieldset {
     border: 1px;
     border-top: 1px solid #B5B8B6;
     font-size: 11px;
-    width:150px;
+    width:200px;
     float:left;
 }
 #fieldsetContainer {
@@ -84,8 +84,8 @@ fieldset {
     width: 300px
 }
 #legend2{
-    float:left;
-    width: 350px
+    width: 150px;
+    margin-left: 20px;
 }
 
 #green, #red, #blue {
@@ -119,4 +119,29 @@ fieldset {
     padding: 3px 5px;
     border: 1px solid black;
     text-align: center;
+}
+
+.legendField {
+    font-size: 12px;
+    width: 300px;
+    height: 25px;
+}
+
+.bigSpace {
+    width: 200px;
+    font-size: 14px;
+
+}
+
+#legendForFirstVis {
+
+    padding: 20px;
+    justify-content: center;
+    float:right;
+}
+
+#together {
+    font-size: 12px;
+    border: 1px dashed;
+   padding: 5px;
 }

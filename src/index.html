@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
+<meta charset="utf-8" xmlns="http://www.w3.org/1999/html">
 <html>
 <head>
-    <link rel="stylesheet" href="css/style.css"/>
-    <link rel="stylesheet" href="css/time.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/time.css"/>
+    <link rel="stylesheet" type="text/css" href="src/css/time.css"/>
+    <link rel="stylesheet" type="text/css" href="css/time.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" type="text/css"
           href="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/jqueryui/dataTables.jqueryui.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/general.css"/>
 
+
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="js/lib/d3.min.js"></script>
     <script src="js/lib/eventDrops.js"></script>
@@ -19,48 +25,58 @@
 <body>
 
 
-<div id="firstContainer">
+<div class="container">
 
-    <div id="fieldsetContainer">
-        <span>Filter Project By: </span>
+    <div id="legendForFirstVis">
 
-        <select id="markFilter">
-            <option value="all" selected>time & cost</option>
-            <option value="time">time</option>
-            <option value="cost">cost</option>
-        </select>
 
-        <fieldset id="plannedFilter">
-            <legend>Show only selected projects:</legend>
-            <label><input type="radio" name="planned" value="all" checked>all</label>
-            <label><input type="radio" name="planned" value="compliant">compliant with planned</label>
-            <label><input type="radio" name="planned" value="more">more than planned</label>
+        <fieldset>
+            <div class="form-group">
+                <label for="markFilter">Filter project by:</label>
+                <select class="form-control" id="markFilter">
+                    <option value="all" selected>time & cost</option>
+                    <option value="time">time</option>
+                    <option value="cost">cost</option>
+                </select>
+            </div>
+            <div id="together">
+                Show only selected projects:
+
+                <div class="radio">
+                    <label> <input type="radio" name="planned" value="all" checked>all
+                    </label>
+                </div>
+                <div class="radio">
+                    <label class="legendField"><input type="radio" name="planned" value="compliant">compliant with
+                        planned</label>
+                </div>
+                <div class="radio">
+                    <label class="legendField"><input type="radio" name="planned" value="more">more than planned</label>
+                </div>
+            </div>
         </fieldset>
 
 
         <fieldset id="legend2">
-            <legend>Legend:</legend>
-            <div>
+            <legend>Color meaning:</legend>
+            <div class="legendField">
                 <div id="green"></div>
                 Compliant with planned
             </div>
-            <div>
+            <div class="legendField">
                 <div id="red"></div>
                 More than planned
             </div>
-            <div>
+            <div class="legendField">
                 <div id="blue"></div>
                 Missing values
             </div>
         </fieldset>
+
     </div>
 
     <div id="chart_placeholder"></div>
 </div>
-
-
-<div style="text-align: center" id="legend"></div>
-<div style="text-align: center" id="zoomEnd"></div>
 
 
 <div id="resultsDiv">
