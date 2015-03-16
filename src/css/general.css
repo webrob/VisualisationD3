@@ -1,6 +1,5 @@
 body {
     background-color: #B5B8B6;
-    font-family: 'Open Sans', sans-serif;
     font-size: 12px;
 }
 
@@ -8,18 +7,16 @@ body {
     font-size: 20px;
 }
 
-
-#legend2 {
+#legendFieldset {
     width: 150px;
     margin-left: 20px;
 }
 
-
-#green, #red, #blue {
-    float: left;
+.color {
     width: 20px;
     height: 20px;
-    margin-right: 2px;
+    float: left;
+    margin-right: 5px;
 }
 
 #green {
@@ -40,18 +37,8 @@ body {
     height: 25px;
 }
 
-.bigSpace {
-    width: 200px;
-    font-size: 14px;
-
-}
-
 #border {
     border: 1px solid;
-}
-
-#together {
-    font-size: 12px;
 }
 
 #tableResults {
