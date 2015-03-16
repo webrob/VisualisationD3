@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/time.css"/>
+    <link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" type="text/css"
+          href="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/jqueryui/dataTables.jqueryui.css">
+
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="js/lib/d3.min.js"></script>
+    <script src="js/lib/eventDrops.js"></script>
+    <script src="//cdn.datatables.net/1.10.5/js/jquery.dataTables.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/tableManager.js"></script>
+    <script src="js/eventSeriesVisualization.js"></script>
+</head>
+<body>
+
+
+<div id="firstContainer">
+
+    <div id="fieldsetContainer">
+        <span>Filter Project By: </span>
+
+        <select id="markFilter">
+            <option value="all" selected>time & cost</option>
+            <option value="time">time</option>
+            <option value="cost">cost</option>
+        </select>
+
+        <fieldset id="plannedFilter">
+            <legend>Show only selected projects:</legend>
+            <label><input type="radio" name="planned" value="all" checked>all</label>
+            <label><input type="radio" name="planned" value="compliant">compliant with planned</label>
+            <label><input type="radio" name="planned" value="more">more than planned</label>
+        </fieldset>
+
+
+        <fieldset id="legend2">
+            <legend>Legend:</legend>
+            <div>
+                <div id="green"></div>
+                Compliant with planned
+            </div>
+            <div>
+                <div id="red"></div>
+                More than planned
+            </div>
+            <div>
+                <div id="blue"></div>
+                Missing values
+            </div>
+        </fieldset>
+    </div>
+
+    <div id="chart_placeholder"></div>
+</div>
+
+
+<div style="text-align: center" id="legend"></div>
+<div style="text-align: center" id="zoomEnd"></div>
+
+
+<div id="resultsDiv">
+    Results for: <span id="results"> </span>
+</div>
+
+<div style="height: 320px">
+    <table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+            <th>Project name</th>
+            <th>Completion date</th>
+            <th>Planned completion date</th>
+            <th>Lifecycle cost ($M)</th>
+            <th>Planned cost ($M)</th>
+        </tr>
+        </thead>
+
+        <tfoot>
+        <tr>
+            <th>Project name</th>
+            <th>Completion date</th>
+            <th>Planned completion date</th>
+            <th>Lifecycle cost ($M)</th>
+            <th>Planned cost ($M)</th>
+        </tr>
+        </tfoot>
+
+    </table>
+</div>
+
+
+</body>
+</html>
