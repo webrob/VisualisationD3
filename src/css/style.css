@@ -4,7 +4,7 @@
 }
 
 .graph-body .line circle {
-    opacity: 0.1;
+    opacity: 0.3;
 }
 
 .y-axis path,
@@ -13,7 +13,6 @@
 .x-axis line,
 .y-axis g line {
     stroke: grey;
-    fill: none;
     stroke-width: 1px;
 }
 
