@@ -29,6 +29,8 @@ $(document).ready(function () {
 });
 
 function getJsonData () {
+    tableManager.clearData();
+    $("#results").html("");
     var plannedType = $("[name=planned]:checked").val();
     var markType = $('#markFilter').find("option:selected").attr('value');
 

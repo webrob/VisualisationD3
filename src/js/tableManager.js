@@ -1,9 +1,9 @@
 function TableManager() {
-    this.oTable = null;
+    this.table = null;
 
     TableManager.prototype.init = function () {
         var _this = this;
-        _this.oTable = $('#example').DataTable({
+        _this.table = $('#example').DataTable({
             "scrollY": "200px",
             "scrollCollapse": true,
             "paging": false,
@@ -16,9 +16,11 @@ function TableManager() {
             "&Agency_Name=" + agencyName + "&plannedType=" + plannedType + "&markType=" + markType;
 
         var _this = this;
-        _this.oTable.ajax.url(newUrl).load();
-        $("div.toolbar").html('<b>Custom tool bar! Text/images etc.</b>');
+        _this.table.ajax.url(newUrl).load();
+    };
+    TableManager.prototype.clearData = function() {
+        var _this = this;
+        _this.table.clear().draw();
     }
-
 
 }
