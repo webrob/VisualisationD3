@@ -6,10 +6,7 @@ $(document).ready(function () {
     tableManager = new TableManager();
     tableManager.init();
 
-    $.getJSON("php/get_data.php", function (result) {
-        eventSeriesVisualization = new EventSeriesVisualization(result);
-        eventSeriesVisualization.init();
-    });
+    getJsonData();
 
     $(window).keydown(function (evt) {
         if (evt.which == 16) {
@@ -22,24 +19,26 @@ $(document).ready(function () {
     });
 
     $("input[name=planned]").on("change", function change() {
-        var plannedType = $(this).val();
-        var markType = $('#markFilter').find("option:selected").attr('value');
-
-        eventSeriesVisualization.filterResults(markType, plannedType);
-    });
-
-    $("input[name=cost]").on("change", function change() {
-
+        getJsonData();
     });
 
     $('#markFilter').change(function () {
-        var plannedType = $("[name=planned]:checked").val();
-        var markType = $(this).find("option:selected").attr('value');
-
-        eventSeriesVisualization.filterResults(markType, plannedType);
+        getJsonData();
     });
 
 });
+
+function getJsonData () {
+    var plannedType = $("[name=planned]:checked").val();
+    var markType = $('#markFilter').find("option:selected").attr('value');
+
+    var url = "php/get_data.php?plannedType=" + plannedType + "&markType=" + markType;
+
+    $.getJSON(url, function (result) {
+        eventSeriesVisualization = new EventSeriesVisualization(result, plannedType,markType);
+        eventSeriesVisualization.init();
+    });
+}
 
 
 Date.prototype.toStringFormat = function () {

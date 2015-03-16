@@ -9,11 +9,65 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+
+$plannedType = $_GET['plannedType'];
+$markType = $_GET['markType'];
+
 $sql = "SELECT Agency_Name, Start_Date, Completion_Date_B1, Planned_Project_Completion_Date_B2,
 Projected_Actual_Project_Completion_Date_B2, Lifecycle_Cost, Planned_Cost_M
- FROM cw1 c WHERE  c.Start_Date !=  '0000-00-00' ORDER BY c.Agency_Name";
-$result = $conn->query($sql);
+ FROM cw1 c WHERE  c.Start_Date !=  '0000-00-00' ";
 
+switch ($plannedType) {
+    case "compliant" :
+
+        switch ($markType) {
+            case "time":
+                $sql = $sql . " and c.Completion_Date_B1 != '0000-00-00' and
+                c.Planned_Project_Completion_Date_B2 != '0000-00-00' and c
+                .Completion_Date_B1 <= c.Planned_Project_Completion_Date_B2";
+                break;
+            case "cost":
+
+                $sql = $sql . " and c.Lifecycle_Cost != 0 and c.Planned_Cost_M != 0 and c.Lifecycle_Cost <= c.Planned_Cost_M";
+                break;
+            case "all":
+
+                $sql = $sql . " and c.Lifecycle_Cost != 0 and c.Planned_Cost_M != 0 and c.Lifecycle_Cost <= c.Planned_Cost_M
+                and c.Completion_Date_B1 != '0000-00-00' and c.Planned_Project_Completion_Date_B2 != '0000-00-00' and
+                c.Completion_Date_B1 <= c.Planned_Project_Completion_Date_B2";
+
+                break;
+        }
+
+        break;
+    case  "more":
+
+        switch ($markType) {
+            case "time":
+                $sql = $sql . " and c.Completion_Date_B1 != '0000-00-00' and
+                c.Planned_Project_Completion_Date_B2 != '0000-00-00' and
+                c.Completion_Date_B1 > c.Planned_Project_Completion_Date_B2";
+                break;
+            case "cost":
+
+                $sql = $sql . " and c.Lifecycle_Cost != 0 and c.Planned_Cost_M != 0 and c.Lifecycle_Cost > c.Planned_Cost_M";
+                break;
+            case "all":
+
+                $sql = $sql . " and c.Lifecycle_Cost != 0 and c.Planned_Cost_M != 0 and c.Lifecycle_Cost > c.Planned_Cost_M
+                and c.Completion_Date_B1 != '0000-00-00' and c.Planned_Project_Completion_Date_B2 != '0000-00-00' and
+                c.Completion_Date_B1 > c.Planned_Project_Completion_Date_B2";
+
+                break;
+        }
+
+        break;
+}
+
+
+$sql = $sql . " ORDER BY c.Agency_Name";
+
+$result = $conn->query($sql);
 $agencyName = "";
 $index = -1;
 $array = array();

@@ -15,10 +15,12 @@ $plannedType = $_GET['plannedType'];
 $markType = $_GET['markType'];
 
 
+/*
 $requestDate = '2008-01-10';
 $agencyName = 'Office of Personnel Management';
-$plannedType = $_GET['plannedType'];
+$plannedType = 'compliant';
 $markType = 'all';
+*/
 
 $sql = "SELECT Completion_Date_B1, Planned_Project_Completion_Date_B2,
 Project_Name, Lifecycle_Cost, Planned_Cost_M

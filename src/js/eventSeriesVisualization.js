@@ -1,7 +1,7 @@
-function EventSeriesVisualization(jsonData) {
+function EventSeriesVisualization(jsonData, plannedType,markType) {
     this.jsonData = jsonData;
-    this.markType = "all";
-    this.plannedType = "all";
+    this.markType = markType;
+    this.plannedType = plannedType;
     this.filteredData = null;
     this.graph = null;
 
@@ -16,187 +16,6 @@ function EventSeriesVisualization(jsonData) {
             }
         }
         _this.filteredData = $.extend(true, [], _this.jsonData);
-    };
-
-
-    EventSeriesVisualization.prototype.filterMoreTimeResults = function () {
-        var _this = this;
-        var i = _this.filteredData.length;
-        while (i--) {
-            var dates = _this.filteredData[i].dates;
-
-            var length = dates.length;
-            while (length--) {
-                var completionDate = _this.filteredData[i]["Completion_Date_B1"][length];
-                var plannedDate = _this.filteredData[i]["Planned_Project_Completion_Date_B2"][length];
-
-                if ((isNaN(completionDate.getTime()) || isNaN(plannedDate.getTime())) ||
-                    (completionDate <= plannedDate)
-                ) {
-                    _this.removeDataFromArray(i, length);
-                }
-            }
-        }
-    };
-
-    EventSeriesVisualization.prototype.filterCompliantTimeResults = function () {
-        var _this = this;
-        var i = _this.filteredData.length;
-        while (i--) {
-            var dates = _this.filteredData[i].dates;
-
-            var length = dates.length;
-            while (length--) {
-                var completionDate = _this.filteredData[i]["Completion_Date_B1"][length];
-                var plannedDate = _this.filteredData[i]["Planned_Project_Completion_Date_B2"][length];
-
-
-                if ((isNaN(completionDate.getTime()) || isNaN(plannedDate.getTime())) ||
-                    (completionDate > plannedDate)
-                ) {
-
-                    _this.removeDataFromArray(i, length);
-                }
-            }
-        }
-    };
-
-    EventSeriesVisualization.prototype.filterMoreCostResults = function () {
-        var _this = this;
-        var i = _this.filteredData.length;
-        while (i--) {
-            var dates = _this.filteredData[i].dates;
-
-            var length = dates.length;
-            while (length--) {
-                var lifecycleCost = _this.filteredData[i]["Lifecycle_Cost"][length];
-                var plannedCost = _this.filteredData[i]["Planned_Cost_M"][length];
-
-                if ((lifecycleCost == 0 || plannedCost == 0) || lifecycleCost <= plannedCost) {
-
-                    _this.removeDataFromArray(i, length);
-                }
-            }
-        }
-    };
-
-
-    EventSeriesVisualization.prototype.filterCompliantCostResults = function () {
-        var _this = this;
-        var i = _this.filteredData.length;
-        while (i--) {
-            var dates = _this.filteredData[i].dates;
-
-            var length = dates.length;
-            while (length--) {
-                var lifecycleCost = _this.filteredData[i]["Lifecycle_Cost"][length];
-                var plannedCost = _this.filteredData[i]["Planned_Cost_M"][length];
-
-                if ((lifecycleCost == 0 || plannedCost == 0) || lifecycleCost > plannedCost) {
-
-                    _this.removeDataFromArray(i, length);
-                }
-            }
-        }
-    };
-
-    EventSeriesVisualization.prototype.filterCompliantCostAndTimeResults = function () {
-        var _this = this;
-        var i = _this.filteredData.length;
-        while (i--) {
-            var dates = _this.filteredData[i].dates;
-
-            var length = dates.length;
-            while (length--) {
-                var lifecycleCost = _this.filteredData[i]["Lifecycle_Cost"][length];
-                var plannedCost = _this.filteredData[i]["Planned_Cost_M"][length];
-                var completionDate = _this.filteredData[i]["Completion_Date_B1"][length];
-                var plannedDate = _this.filteredData[i]["Planned_Project_Completion_Date_B2"][length];
-
-
-                if ((isNaN(completionDate.getTime()) || isNaN(plannedDate.getTime())) ||
-                    (lifecycleCost == 0 || plannedCost == 0) ||
-                    (lifecycleCost > plannedCost) || (completionDate > plannedDate)
-                ) {
-
-                    _this.removeDataFromArray(i, length);
-                }
-            }
-        }
-    };
-
-    EventSeriesVisualization.prototype.filterMoreCostAndTimeResults = function () {
-        var _this = this;
-        var i = _this.filteredData.length;
-        while (i--) {
-            var dates = _this.filteredData[i].dates;
-
-            var length = dates.length;
-            while (length--) {
-                var lifecycleCost = _this.filteredData[i]["Lifecycle_Cost"][length];
-                var plannedCost = _this.filteredData[i]["Planned_Cost_M"][length];
-                var completionDate = _this.filteredData[i]["Completion_Date_B1"][length];
-                var plannedDate = _this.filteredData[i]["Planned_Project_Completion_Date_B2"][length];
-
-
-                if ((isNaN(completionDate.getTime()) || isNaN(plannedDate.getTime())) ||
-                    (lifecycleCost == 0 || plannedCost == 0) ||
-                    (lifecycleCost <= plannedCost) || (completionDate <= plannedDate)
-                ) {
-                    _this.removeDataFromArray(i, length);
-                }
-            }
-        }
-    };
-    EventSeriesVisualization.prototype.removeDataFromArray = function(i, j) {
-        var _this = this;
-        _this.filteredData[i].dates.splice(j, 1);
-        _this.filteredData[i].Lifecycle_Cost.splice(j, 1);
-        _this.filteredData[i].Planned_Cost_M.splice(j, 1);
-        _this.filteredData[i].Completion_Date_B1.splice(j, 1);
-        _this.filteredData[i].Planned_Project_Completion_Date_B2.splice(j, 1);
-    };
-
-    EventSeriesVisualization.prototype.filterResults = function (markType, plannedType) {
-        var _this = this;
-        _this.markType = markType;
-        _this.plannedType = plannedType;
-        _this.filteredData = $.extend(true, [], _this.jsonData);
-
-        switch (plannedType) {
-            case "compliant" :
-
-                switch (markType) {
-                    case "time":
-                        _this.filterCompliantTimeResults();
-                        break;
-                    case "cost":
-
-                        _this.filterCompliantCostResults();
-                        break;
-                    case "all":
-                        _this.filterCompliantCostAndTimeResults();
-                        break;
-                }
-
-                break;
-            case  "more":
-
-                switch (markType) {
-                    case "time":
-                        _this.filterMoreTimeResults();
-                        break;
-                    case "cost":
-                        _this.filterMoreCostResults();
-                        break;
-                    case "all":
-                        _this.filterMoreCostAndTimeResults();
-                        break;
-                }
-                break;
-        }
-
-        _this.createGraph();
     };
 
     EventSeriesVisualization.prototype.getEventColor = function (datum, i, j) {
@@ -297,6 +116,7 @@ function EventSeriesVisualization(jsonData) {
 
     EventSeriesVisualization.prototype.init = function () {
         var _this = this;
+
         _this.convertJsonDatesToDatesObjects();
         _this.createGraph();
     };
