@@ -5,8 +5,9 @@ function EventSeriesVisualization(jsonData, plannedType, markType) {
     this.filteredData = null;
     this.graph = null;
 
+    var _this = this;
+
     EventSeriesVisualization.prototype.convertJsonDatesToDatesObjects = function () {
-        var _this = this;
         for (var i in _this.jsonData) {
             var dates = _this.jsonData[i].dates;
             for (var j in dates) {
@@ -19,7 +20,6 @@ function EventSeriesVisualization(jsonData, plannedType, markType) {
     };
 
     EventSeriesVisualization.prototype.getEventColor = function (datum, i, j) {
-        var _this = this;
         var completionDate = _this.filteredData[i]["Completion_Date_B1"][j];
         var plannedDate = _this.filteredData[i]["Planned_Project_Completion_Date_B2"][j];
         var lifecycleCost = _this.filteredData[i]["Lifecycle_Cost"][j];
@@ -82,8 +82,6 @@ function EventSeriesVisualization(jsonData, plannedType, markType) {
     };
 
     EventSeriesVisualization.prototype.createGraph = function () {
-        var _this = this;
-
         var startDate = $(".start").text();
         if (startDate == "")
         {
@@ -127,8 +125,6 @@ function EventSeriesVisualization(jsonData, plannedType, markType) {
     };
 
     EventSeriesVisualization.prototype.init = function () {
-        var _this = this;
-
         _this.convertJsonDatesToDatesObjects();
         _this.createGraph();
     };

@@ -6,6 +6,13 @@ $(document).ready(function () {
     tableManager = new TableManager();
     tableManager.init();
 
+
+    $.getJSON("php/get_second_vis_data.php", function (result) {
+        var scatterPlot = new ScatterPlot(result);
+        scatterPlot.init();
+    });
+
+
     getJsonData();
 
     $(window).keydown(function (evt) {
@@ -28,7 +35,7 @@ $(document).ready(function () {
 
 });
 
-function getJsonData () {
+function getJsonData() {
     tableManager.clearData();
     $("#results").html("");
     var plannedType = $("[name=planned]:checked").val();
@@ -37,7 +44,7 @@ function getJsonData () {
     var url = "php/get_data.php?plannedType=" + plannedType + "&markType=" + markType;
 
     $.getJSON(url, function (result) {
-        eventSeriesVisualization = new EventSeriesVisualization(result, plannedType,markType);
+        eventSeriesVisualization = new EventSeriesVisualization(result, plannedType, markType);
         eventSeriesVisualization.init();
     });
 }

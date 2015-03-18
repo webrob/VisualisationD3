@@ -1,0 +1,22 @@
+.zoom {
+    fill: transparent;
+    cursor: pointer;
+}
+
+.graph-body .line circle {
+    opacity: 0.3;
+}
+
+.y-axis path,
+.y-axis line,
+.x-axis path,
+.x-axis line,
+.y-axis g line {
+    stroke: grey;
+    stroke-width: 1px;
+}
+
+path,
+line {
+    stroke-width: 1px;
+}

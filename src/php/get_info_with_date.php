@@ -78,7 +78,6 @@ $result = $conn->query($sql);
 
 
 $index = -1;
-
 $array["data"] = array();
 
 if ($result->num_rows > 0) {
