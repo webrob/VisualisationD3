@@ -8,7 +8,6 @@ $(document).ready(function () {
 });
 
 function initAll() {
-
     initScatterPlot();
     initMonthsSelects();
     initShiftKeyListener();
@@ -84,8 +83,6 @@ function getJsonData() {
         eventSeriesVisualization = new EventSeriesVisualization(result, plannedType, markType);
         eventSeriesVisualization.init();
     });
-
-
 }
 
 Date.prototype.toStringFormat = function () {
@@ -100,6 +97,5 @@ Date.prototype.toStringFormat = function () {
     if (month < 10) {
         month = '0' + month;
     }
-
     return year + '-' + month + '-' + day;
 };

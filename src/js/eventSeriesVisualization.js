@@ -76,8 +76,6 @@ function EventSeriesVisualization(jsonData, plannedType, markType) {
                 }
                 break;
         }
-
-
         return color;
     };
 

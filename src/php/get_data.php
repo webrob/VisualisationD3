@@ -9,7 +9,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-
 $plannedType = $_GET['plannedType'];
 $markType = $_GET['markType'];
 
@@ -60,10 +59,8 @@ switch ($plannedType) {
 
                 break;
         }
-
         break;
 }
-
 
 $sql = $sql . " ORDER BY c.Agency_Name";
 
@@ -77,18 +74,16 @@ if ($result->num_rows > 0) {
         $newAgencyName = $row["Agency_Name"];
         if ($newAgencyName != $agencyName)
         {
-
             $index = $index + 1;
+
             $newArray["name"] = $newAgencyName;
             $newArray["dates"] = array();
-
             $newArray["Completion_Date_B1"] = array();
             $newArray["Planned_Project_Completion_Date_B2"] = array();
             $newArray["Lifecycle_Cost"] = array();
             $newArray["Planned_Cost_M"] = array();
 
             array_push($array, $newArray);
-
         }
 
         array_push($array[$index]["dates"] , $row["Start_Date"]);

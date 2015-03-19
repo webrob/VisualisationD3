@@ -9,7 +9,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-
 $sql = "SELECT
   c.Agency_Name                                     agencyName,
   substr(c.Start_Date, 1, 4)                        startYear,
@@ -56,11 +55,8 @@ if ($result->num_rows > 0) {
         array_push($array[$index]["daysAmount"], $yearWithDaysAmount);
 
         $agencyName = $newAgencyName;
-
-
     }
 }
-
 $conn->close();
 
 $json = json_encode($array);

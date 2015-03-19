@@ -17,7 +17,7 @@ function AsterPlot(jsonData) {
     };
 
     AsterPlot.prototype.getMaxCost = function () {
-        if ( _this.jsonData.length > 0){
+        if (_this.jsonData.length > 0) {
             return _this.jsonData[0]['lifecycleCost'];
         }
 
@@ -83,24 +83,13 @@ function AsterPlot(jsonData) {
             .on('mouseover', tip.show)
             .on('mouseout', tip.hide);
 
-        var outerPath = svg.selectAll(".outlineArc")
+        svg.selectAll(".outlineArc")
             .data(pie(_this.jsonData))
             .enter().append("path")
             .attr("fill", "none")
             .attr("stroke", "gray")
             .attr("class", "outlineArc")
             .attr("d", outlineArc);
-
-
-        // calculate the weighted mean score
-        var score =
-            _this.jsonData.reduce(function (a, b) {
-                //console.log('a:' + a + ', b.score: ' + b.score + ', b.weight: ' + b.weight);
-                return a + (b.score * b.weight);
-            }, 0) /
-            _this.jsonData.reduce(function (a, b) {
-                return a + b.weight;
-            }, 0);
 
         svg.append("svg:text")
             .attr("class", "aster-score")
@@ -109,9 +98,9 @@ function AsterPlot(jsonData) {
             .text(_this.getTextInsidePlot());
     };
 
-    AsterPlot.prototype.getTextInsidePlot = function() {
+    AsterPlot.prototype.getTextInsidePlot = function () {
         var text;
-        if ( _this.jsonData.length > 0){
+        if (_this.jsonData.length > 0) {
             text = _this.jsonData.length;
         } else {
             text = "No data";

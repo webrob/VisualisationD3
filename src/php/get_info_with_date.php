@@ -14,14 +14,6 @@ $agencyName = $_GET['Agency_Name'];
 $plannedType = $_GET['plannedType'];
 $markType = $_GET['markType'];
 
-
-/*
-$requestDate = '2008-01-10';
-$agencyName = 'Office of Personnel Management';
-$plannedType = 'compliant';
-$markType = 'all';
-*/
-
 $sql = "SELECT Completion_Date_B1, Planned_Project_Completion_Date_B2,
 Project_Name, Lifecycle_Cost, Planned_Cost_M
  FROM cw1 c WHERE  c.Start_Date !=  '0000-00-00' AND c.Agency_Name ='" . $agencyName . "' and c.Start_Date = '" . $requestDate . "'";
@@ -69,13 +61,10 @@ switch ($plannedType) {
 
                 break;
         }
-
         break;
 }
 
-
 $result = $conn->query($sql);
-
 
 $index = -1;
 $array["data"] = array();
@@ -92,7 +81,6 @@ if ($result->num_rows > 0) {
         array_push($array["data"][$index], $row["Planned_Cost_M"]);
     }
 }
-
 function checkMissingDate($date)
 {
     if ($date == '0000-00-00') {

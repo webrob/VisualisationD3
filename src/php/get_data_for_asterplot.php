@@ -14,14 +14,6 @@ $agencyName = $_GET['agencyName'];
 $fromMonth = $_GET['fromMonth'];
 $toMonth = $_GET['toMonth'];
 
-/*
-$year = '2002';
-$agencyName = 'Department of Agriculture';
-$minMonth = '01';
-$maxMonth = '12'];
-*/
-
-
 $sql = "SELECT
   c.Start_Date startDate,
   c.Completion_Date_B1 completionDate,
@@ -50,7 +42,6 @@ if ($result->num_rows > 0) {
             "lifecycleCost" => $row["lifecycleCost"],
             "projectDescription" => $row["projectDescription"],
         );
-
         array_push($array, $rowArray);
     }
 }
