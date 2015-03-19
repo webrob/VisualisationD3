@@ -6,12 +6,10 @@ $(document).ready(function () {
     tableManager = new TableManager();
     tableManager.init();
 
-
-    $.getJSON("php/get_second_vis_data.php", function (result) {
+    $.getJSON("php/get_data_for_scatterplot.php", function (result) {
         var scatterPlot = new ScatterPlot(result);
         scatterPlot.init();
     });
-
 
     getJsonData();
 

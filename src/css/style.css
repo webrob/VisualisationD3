@@ -30,8 +30,23 @@
     fill: #4d4d4d;
 }
 
+.aa {
+    fill: none;
+    pointer-events: none;
+    cursor: default;
+}
+
 .overlay {
     fill: none;
+    /*
+    pointer-events: none;
+    cursor: default;
+    */
+    pointer-events: all;
+    cursor: ew-resize;
+}
+
+.overlay.active {
     pointer-events: all;
     cursor: ew-resize;
 }

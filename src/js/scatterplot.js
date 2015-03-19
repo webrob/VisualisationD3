@@ -9,6 +9,7 @@ function ScatterPlot(jsonData) {
     this.yearScale = null;
     this.overlay = null;
     this.dot = null;
+    this.tip = null;
 
     var _this = this;
 
@@ -86,20 +87,37 @@ function ScatterPlot(jsonData) {
     };
 
     ScatterPlot.prototype.mouseover = function () {
-        _this.label.classed("active", true);
+        if (!shiftPressed) {
+            _this.label.classed("active", true);
+            d3.select("#overlayID").classed("overlay", true);
+            d3.select("#overlayID").classed("aa", false);
+        } else {
+            _this.label.classed("active", false);
+            d3.select("#overlayID").classed("aa", true);
+            d3.select("#overlayID").classed("overlay", false);
+        }
+
     };
 
     ScatterPlot.prototype.mouseout = function () {
         _this.label.classed("active", false);
+        d3.select("#overlayID").classed("overlay", true);
+        d3.select("#overlayID").classed("aa", false);
     };
 
     ScatterPlot.prototype.mousemove = function () {
-        var year = Math.round(_this.yearScale.invert(d3.mouse(this)[0]));
-        _this.displayYear(year);
+        if (!shiftPressed) {
+            var year = Math.round(_this.yearScale.invert(d3.mouse(this)[0]));
+            _this.displayYear(year);
+        } else {
+            _this.label.classed("active", false);
+            d3.select("#overlayID").classed("aa", true);
+            d3.select("#overlayID").classed("overlay", false);
+        }
     };
 
-    // Tweens the entire chart by first tweening the year, and then the data.
-    // For the interpolated data, the dots and label are redrawn.
+// Tweens the entire chart by first tweening the year, and then the data.
+// For the interpolated data, the dots and label are redrawn.
     ScatterPlot.prototype.tweenYear = function () {
         var year = d3.interpolateNumber(1996, 2013);
         return function (t) {
@@ -108,7 +126,7 @@ function ScatterPlot(jsonData) {
         };
     };
 
-    // Updates the display to show the specified year.
+// Updates the display to show the specified year.
     ScatterPlot.prototype.displayYear = function (year) {
         _this.dot.data(_this.interpolateDataSet(year), _this.key).call(_this.position).sort(_this.order);
         _this.label.text(Math.round(year));
@@ -174,6 +192,25 @@ function ScatterPlot(jsonData) {
             .attr("y", height - 24)
             .attr("x", width)
             .text(1996);
+
+        _this.tip = d3.tip()
+            .attr('class', 'd3-tip')
+            .offset([0, 0])
+            .html(function (d) {
+                return d.name;
+            });
+
+        _this.svg.call(_this.tip);
+    };
+
+    ScatterPlot.prototype.initAsterPlot = function(year, agencyName) {
+        var url = "php/get_data_for_asterplot.php?year=" + year + "&agencyName=" + agencyName;
+        $.getJSON(url,  function (result) {
+            d3.select("#asterPlot").select("svg").remove();
+
+            var asterPlot = new AsterPlot(result);
+            asterPlot.init();
+        });
     };
 
     ScatterPlot.prototype.initPlotWithData = function () {
@@ -190,19 +227,19 @@ function ScatterPlot(jsonData) {
             })
             .call(_this.position)
             .on("mouseenter", function (d, i) {
-                var x = _this.label.text();
-                var z = d.name;
-                var c;
+                var year = _this.label.text();
+                var agencyName = d.name;
+
+                _this.tip.show(d);
+
+                _this.initAsterPlot(year, agencyName);
+
+            })
+            .on("mouseleave", function (d, i) {
+                _this.tip.hide();
             })
             .sort(_this.order);
 
-        // Add a title.
-        _this.dot.append("title")
-            .text(function (d) {
-                return d.name + " aa";
-            }).on("mouseover", function () {
-                return tooltip.style("visibility", "visible");
-            });
 
         // Add an overlay for the year label.
         var box = _this.label.node().getBBox();
@@ -212,6 +249,7 @@ function ScatterPlot(jsonData) {
             .clamp(true);
 
         _this.overlay = _this.svg.append("rect")
+            .attr("id", "overlayID")
             .attr("class", "overlay")
             .attr("x", box.x)
             .attr("y", box.y)
@@ -228,12 +266,12 @@ function ScatterPlot(jsonData) {
     };
 
 
-    // Defines a sort order so that the smallest dots are drawn on top.
+// Defines a sort order so that the smallest dots are drawn on top.
     ScatterPlot.prototype.order = function (a, b) {
         return _this.radius(b) - _this.radius(a);
     };
 
-    // After the transition finishes, you can mouseover to change the year.
+// After the transition finishes, you can mouseover to change the year.
     ScatterPlot.prototype.enableInteraction = function () {
         // Cancel the current transition, if any.
         _this.svg.transition().duration(0);
