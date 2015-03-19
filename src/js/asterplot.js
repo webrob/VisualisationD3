@@ -37,7 +37,7 @@ function AsterPlot(jsonData) {
 
         var tip = d3.tip()
             .attr('class', 'd3-asterTip')
-            .offset([150, 150])
+            .offset([0, 0])
             .html(function (d) {
                 return "Project name: " + d.data.projectName + "<br/>" + "<br/>" +
                     "Start date: " + d.data.startDate + "<br/>" + "<br/>" +

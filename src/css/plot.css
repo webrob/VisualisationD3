@@ -30,7 +30,7 @@
     fill: #4d4d4d;
 }
 
-.aa {
+.doNotOverlay {
     fill: none;
     pointer-events: none;
     cursor: default;
@@ -68,7 +68,7 @@
     font-size: 500%;
 }
 
-.d3-scatterTip {
+.d3-scatterTip  {
     line-height: 1.3;
     font-weight: bold;
     padding: 12px;
@@ -84,7 +84,7 @@
     background: rgba(0, 0, 0, 0.8);
     color: #fff;
     border-radius: 2px;
-    width: 800px;
+    width: 900px;
     word-wrap: break-word;
 }
 

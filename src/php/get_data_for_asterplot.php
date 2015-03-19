@@ -42,14 +42,14 @@ $agencyName = "";
 $array = array();
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $rowArray = [
+        $rowArray = array(
             "startDate" => $row["startDate"],
             "completionDate" => checkMissingDate($row["completionDate"]),
             "investmentTitle" => $row["investmentTitle"],
             "projectName" => $row["projectName"],
             "lifecycleCost" => $row["lifecycleCost"],
             "projectDescription" => $row["projectDescription"],
-        ];
+        );
 
         array_push($array, $rowArray);
     }

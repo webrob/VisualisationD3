@@ -93,10 +93,10 @@ function ScatterPlot(jsonData) {
         if (!shiftPressed) {
             _this.label.classed("active", true);
             d3.select("#overlayID").classed("overlay", true);
-            d3.select("#overlayID").classed("aa", false);
+            d3.select("#overlayID").classed("doNotOverlay", false);
         } else {
             _this.label.classed("active", false);
-            d3.select("#overlayID").classed("aa", true);
+            d3.select("#overlayID").classed("doNotOverlay", true);
             d3.select("#overlayID").classed("overlay", false);
         }
 
@@ -105,7 +105,7 @@ function ScatterPlot(jsonData) {
     ScatterPlot.prototype.mouseout = function () {
         _this.label.classed("active", false);
         d3.select("#overlayID").classed("overlay", true);
-        d3.select("#overlayID").classed("aa", false);
+        d3.select("#overlayID").classed("doNotOverlay", false);
     };
 
     ScatterPlot.prototype.mousemove = function () {
@@ -114,7 +114,7 @@ function ScatterPlot(jsonData) {
             _this.displayYear(year);
         } else {
             _this.label.classed("active", false);
-            d3.select("#overlayID").classed("aa", true);
+            d3.select("#overlayID").classed("doNotOverlay", true);
             d3.select("#overlayID").classed("overlay", false);
         }
     };

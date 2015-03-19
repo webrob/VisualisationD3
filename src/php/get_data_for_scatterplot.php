@@ -46,13 +46,13 @@ if ($result->num_rows > 0) {
 
         $startYear = $row["startYear"];
 
-        $yearWithLifecycleSum = [$startYear, $row["lifecycleSum"]];
+        $yearWithLifecycleSum = array($startYear, $row["lifecycleSum"]);
         array_push($array[$index]["lifecycleSum"], $yearWithLifecycleSum);
 
-        $yearWithProjectsCount = [$startYear, $row["projectsCount"]];
+        $yearWithProjectsCount = array($startYear, $row["projectsCount"]);
         array_push($array[$index]["projectsCount"], $yearWithProjectsCount);
 
-        $yearWithDaysAmount = [$startYear, $row["daysAmount"]];
+        $yearWithDaysAmount = array($startYear, $row["daysAmount"]);
         array_push($array[$index]["daysAmount"], $yearWithDaysAmount);
 
         $agencyName = $newAgencyName;
