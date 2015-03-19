@@ -187,7 +187,7 @@ function ScatterPlot(jsonData) {
             .html(function (d) {
                 return d.name  + "<br/>" +
                     "Lifecycle sum: " + d.lifecycleSum + "<br/>" +
-                    "ProjectsCount: " + d.projectsCount + "<br/>" +
+                    "Projects count: " + d.projectsCount + "<br/>" +
                     "Days amount: " + d.daysAmount;
             });
 

@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css"
           href="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/jqueryui/dataTables.jqueryui.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/general.css"/>
+    <link rel="stylesheet" type="text/css" href="css/global.css"/>
 
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -28,14 +28,64 @@
 
 <div class="container">
 
+    <h1> Open Data Innovation </h1>
+
+    <h2> Data Cleaning and Visualisation </h2>
+
+    <h3> Robert Rozmus</h3>
+
     <ul class="nav nav-tabs">
         <li class="nav active"><a href="#firstVisualisation" data-toggle="tab">first visualisation</a></li>
         <li class="nav"><a id="secondVis" href="#secondVisualisation" data-toggle="tab">second visualisation</a></li>
     </ul>
 
-
     <div class="tab-content">
         <div class="tab-pane fade in active" id="firstVisualisation">
+
+            <div class="description">
+                <h4> What the visualisation is showing? </h4>
+
+                This visualisation shows the changes of projects counts and lifecycle sum (in million of dollars)
+                during years in the particular agencies. Each agency is shown as a circle which radius depends on
+                project's days amount - the longer project, the bigger circle. <br/> <br/>
+                After choosing a particular circle, the tip box appears containing information about chosen agency such
+                as: <br/>
+                name, lifecycle sum, projects count, days amount. Additionally, the pie chart appears containing all
+                projects in
+                selected year and agency. However, you can filter results to a specific months in selected year. After
+                moving mouse on
+                some pie, the tip box appears containing information about chosen project such as: <br/>
+                project name, start date, completion date, lifecycle cost, investment title, project description.
+
+                <h4> How the visualisation is interactive? </h4>
+
+                <p>You can:</p>
+                <ul>
+                    <li>change a year moving a mouse on the year's label</li>
+                    <li>see details about selected agency (circle) by entering a mouse on it</li>
+                    <li>see additional pie chart connected with selected agency (below the main chart)</li>
+                    <li>see details about selected project (pie) by entering a mouse on it</li>
+                    <li>filter results in a pie chart</li>
+                </ul>
+
+                <h4> Who the intended audience is? </h4>
+
+                <ul>
+                    <li>
+                        general public audience - to see how spending money on the different agencies is changed
+                        across years, where the most of the money went
+                    </li>
+                    <li>
+                        financial supervision of the government - to see which projects took the most of money and how
+                        long they lasted
+                    </li>
+                </ul>
+
+                <h5> Useful tip: press and hold Shift key to disable years filtering and to be able to choose agency
+                    around year label
+                </h5>
+
+            </div>
 
             <div id="chart"></div>
 
@@ -98,6 +148,47 @@
 
         </div>
         <div class="tab-pane fade" id="secondVisualisation">
+
+            <div class="description">
+                <h4> What the visualisation is showing? </h4>
+
+                This visualisation shows all projects through all years. Additionally, there is a table containing
+                details about selected project (by entering a mouse on a circle while holding a shift key) such as:
+                <br/>
+                project name, completion date, planned completion date, lifecycle cost ($M), planned cost ($M). <br/>
+                <br/>
+                There is also possibility to filter results by time & costs, only time or only cost to see all projects,
+                only projects compliant with planned time/costs or only projects more then planned time/costs.
+
+                <h4> How the visualisation is interactive? </h4>
+
+                <p>You can:</p>
+                <ul>
+                    <li>zoom in and out all projects through all years</li>
+                    <li>
+                        see details, in the table below chart, about selected project (circle)
+                        by entering a mouse on it and holding shift key
+                    </li>
+                    <li>searching results in the table (search field)</li>
+                    <li>filter results in a chart (dropdown list and radio buttons)</li>
+                </ul>
+
+                <h4> Who the intended audience is? </h4>
+
+                <ul>
+                    <li>
+                        government - to see which projects were within planned time and/or budget
+                    </li>
+                    <li>
+                        potential investors - to see in which sector/agency it pays to invest a money
+                    </li>
+                </ul>
+
+                <h5> Useful tip: press and hold Shift key to see details about selected project
+                    (by entering mouse on a circle)
+                </h5>
+
+            </div>
 
             <div id="chart_placeholder"></div>
 
