@@ -1,4 +1,4 @@
-#resultsDiv {
+.resultsDiv {
     font-size: 20px;
 }
 
@@ -37,5 +37,9 @@
 }
 
 #tableResults {
+    height: 200px;
+}
+
+#tableData {
     height: 200px;
 }

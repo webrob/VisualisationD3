@@ -10,6 +10,9 @@ function ScatterPlot(jsonData) {
     this.overlay = null;
     this.dot = null;
     this.tip = null;
+    this.selectedYear = null;
+    this.selectedAgencyName = null;
+    this.asterPlot = null;
 
     var _this = this;
 
@@ -194,22 +197,37 @@ function ScatterPlot(jsonData) {
             .text(1996);
 
         _this.tip = d3.tip()
-            .attr('class', 'd3-tip')
+            .attr('class', 'd3-scatterTip')
             .offset([0, 0])
             .html(function (d) {
-                return d.name;
+                return d.name  + "<br/>" +
+                    "Lifecycle sum: " + d.lifecycleSum + "<br/>" +
+                    "ProjectsCount: " + d.projectsCount + "<br/>" +
+                    "Days amount: " + d.daysAmount;
             });
 
         _this.svg.call(_this.tip);
     };
 
-    ScatterPlot.prototype.initAsterPlot = function(year, agencyName) {
-        var url = "php/get_data_for_asterplot.php?year=" + year + "&agencyName=" + agencyName;
-        $.getJSON(url,  function (result) {
+    ScatterPlot.prototype.recreateAsterPlotIfAlreadyExists = function () {
+        if (_this.asterPlot != null) {
+            scatterPlot.initAsterPlot(_this.selectedYear, _this.selectedAgencyName);
+        }
+    };
+
+    ScatterPlot.prototype.initAsterPlot = function (year, agencyName) {
+        _this.selectedYear = year;
+        _this.selectedAgencyName = agencyName;
+        var fromMonth = $('#fromMonth').val();
+        var toMonth = $('#toMonth').val();
+
+        var url = "php/get_data_for_asterplot.php?year=" + year + "&agencyName=" + agencyName +
+            "&fromMonth=" + fromMonth + "&toMonth=" + toMonth;
+        $.getJSON(url, function (result) {
             d3.select("#asterPlot").select("svg").remove();
 
-            var asterPlot = new AsterPlot(result);
-            asterPlot.init();
+            _this.asterPlot = new AsterPlot(result);
+            _this.asterPlot.init();
         });
     };
 
@@ -230,8 +248,9 @@ function ScatterPlot(jsonData) {
                 var year = _this.label.text();
                 var agencyName = d.name;
 
-                _this.tip.show(d);
+                $("#asterResults").html(agencyName + " in " + year);
 
+                _this.tip.show(d);
                 _this.initAsterPlot(year, agencyName);
 
             })

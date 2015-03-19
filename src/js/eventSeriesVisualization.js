@@ -116,7 +116,7 @@ function EventSeriesVisualization(jsonData, plannedType, markType) {
                     var markType = $('#markFilter').find("option:selected").attr('value');
 
                     tableManager.loadNewData(timestamp, _this.filteredData[i].name, plannedType, markType);
-                    $("#results").html(" " + _this.filteredData[i].name + " on " + timestamp[0].toStringFormat());
+                    $("#chartResults").html(" " + _this.filteredData[i].name + " on " + timestamp[0].toStringFormat());
                 }
             });
 

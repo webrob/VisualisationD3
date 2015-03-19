@@ -2,6 +2,7 @@
 <meta charset="utf-8">
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="src/css/eventSeriesVisualization.css"/>
     <link rel="stylesheet" type="text/css" href="css/eventSeriesVisualization.css"/>
     <link rel="stylesheet" type="text/css" href="css/eventDrops.css"/>
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -28,89 +29,164 @@
 
 <div class="container">
 
-    <div id="chart_placeholder"></div>
-
-    <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-8">
-            <div id="resultsDiv">
-                Results for: <span id="results"> </span>
-            </div>
-
-            <div id="tableResults">
-                <table id="example" class="display" cellspacing="0" width="100%">
-                    <thead>
-                    <tr>
-                        <th>Project name</th>
-                        <th>Completion date</th>
-                        <th>Planned completion date</th>
-                        <th>Lifecycle cost ($M)</th>
-                        <th>Planned cost ($M)</th>
-                    </tr>
-                    </thead>
-
-                    <tfoot>
-                    <tr>
-                        <th>Project name</th>
-                        <th>Completion date</th>
-                        <th>Planned completion date</th>
-                        <th>Lifecycle cost ($M)</th>
-                        <th>Planned cost ($M)</th>
-                    </tr>
-                    </tfoot>
-
-                </table>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-4">
-            <div id="legendForFirstVis">
+    <ul class="nav nav-tabs">
+        <li class="nav active"><a href="#firstVisualisation" data-toggle="tab">first visualisation</a></li>
+        <li class="nav"><a id="secondVis" href="#secondVisualisation" data-toggle="tab">second visualisation</a></li>
+    </ul>
 
 
-                <div class="row" id="border">
-                    <div class="col-xs-6">
-                        <fieldset>
-                            <div class="form-group">
-                                <label for="markFilter">Filter project by:</label>
-                                <select class="form-control" id="markFilter">
-                                    <option value="all" selected>time & cost</option>
-                                    <option value="time">time</option>
-                                    <option value="cost">cost</option>
-                                </select>
-                            </div>
-                            <div id="together">
-                                Show only selected projects:
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="firstVisualisation">
 
-                                <div class="radio">
-                                    <label> <input type="radio" name="planned" value="all" checked>all
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label class="legendField"><input type="radio" name="planned" value="compliant">compliant
-                                        with
-                                        planned</label>
-                                </div>
-                                <div class="radio">
-                                    <label class="legendField"><input type="radio" name="planned" value="more">more than
-                                        planned</label>
-                                </div>
-                            </div>
-                        </fieldset>
+            <div id="chart"></div>
+
+            <div id="asterDiv">
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-8">
+                        <div class="resultsDiv">
+                            Results for: <span id="asterResults" class="results"> </span>
+                        </div>
                     </div>
-                    <div class="col-xs-6">
-                        <fieldset id="legendFieldset">
-                            <legend>Color meaning:</legend>
-                            <div class="legendField">
-                                <div id="green" class="color"></div>
-                                Compliant with planned
+                    <div class="col-xs-6 col-md-4">
+
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label for="fromMonth"> from</label>
+                                    <select id='fromMonth' class="form-control">
+                                        <option value='01'>January</option>
+                                        <option value='02'>February</option>
+                                        <option value='03'>March</option>
+                                        <option value='04'>April</option>
+                                        <option value='05'>May</option>
+                                        <option value='06'>June</option>
+                                        <option value='07'>July</option>
+                                        <option value='08'>August</option>
+                                        <option value='09'>September</option>
+                                        <option value='10'>October</option>
+                                        <option value='11'>November</option>
+                                        <option value='12'>December</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="legendField">
-                                <div id="red" class="color"></div>
-                                More than planned
+
+                            <div class="col-xs-6">
+                                <div class="form-group">
+                                    <label for="toMonth"> to </label>
+                                    <select id='toMonth' class="form-control">
+                                        <option value='01'>January</option>
+                                        <option value='02'>February</option>
+                                        <option value='03'>March</option>
+                                        <option value='04'>April</option>
+                                        <option value='05'>May</option>
+                                        <option value='06'>June</option>
+                                        <option value='07'>July</option>
+                                        <option value='08'>August</option>
+                                        <option value='09'>September</option>
+                                        <option value='10'>October</option>
+                                        <option value='11'>November</option>
+                                        <option value='12' selected>December</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="legendField">
-                                <div id="blue" class="color"></div>
-                                Missing values
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="asterPlot"></div>
+
+        </div>
+        <div class="tab-pane fade" id="secondVisualisation">
+
+            <div id="chart_placeholder"></div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-8">
+                    <div class="resultsDiv">
+                        Results for: <span id="chartResults" class="results"> </span>
+                    </div>
+
+                    <div id="tableResults">
+                        <table id="tableData" class="display" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>Project name</th>
+                                <th>Completion date</th>
+                                <th>Planned completion date</th>
+                                <th>Lifecycle cost ($M)</th>
+                                <th>Planned cost ($M)</th>
+                            </tr>
+                            </thead>
+
+                            <tfoot>
+                            <tr>
+                                <th>Project name</th>
+                                <th>Completion date</th>
+                                <th>Planned completion date</th>
+                                <th>Lifecycle cost ($M)</th>
+                                <th>Planned cost ($M)</th>
+                            </tr>
+                            </tfoot>
+
+                        </table>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-4">
+                    <div id="legendForFirstVis">
+
+
+                        <div class="row" id="border">
+                            <div class="col-xs-6">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <label for="markFilter">Filter project by:</label>
+                                        <select class="form-control" id="markFilter">
+                                            <option value="all" selected>time & cost</option>
+                                            <option value="time">time</option>
+                                            <option value="cost">cost</option>
+                                        </select>
+                                    </div>
+                                    <div id="together">
+                                        Show only selected projects:
+
+                                        <div class="radio">
+                                            <label> <input type="radio" name="planned" value="all" checked>all
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label class="legendField"><input type="radio" name="planned"
+                                                                              value="compliant">compliant
+                                                with
+                                                planned</label>
+                                        </div>
+                                        <div class="radio">
+                                            <label class="legendField"><input type="radio" name="planned" value="more">more
+                                                than
+                                                planned</label>
+                                        </div>
+                                    </div>
+                                </fieldset>
                             </div>
-                        </fieldset>
+                            <div class="col-xs-6">
+                                <fieldset id="legendFieldset">
+                                    <legend>Color meaning:</legend>
+                                    <div class="legendField">
+                                        <div id="green" class="color"></div>
+                                        Compliant with planned
+                                    </div>
+                                    <div class="legendField">
+                                        <div id="red" class="color"></div>
+                                        More than planned
+                                    </div>
+                                    <div class="legendField">
+                                        <div id="blue" class="color"></div>
+                                        Missing values
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -118,9 +194,6 @@
     </div>
 
 
-    <div id="chart"></div>
-
-    <div id="asterPlot"></div>
 
 </div>
 

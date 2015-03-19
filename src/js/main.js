@@ -1,18 +1,45 @@
 var tableManager;
 var shiftPressed = false;
 var eventSeriesVisualization;
+var scatterPlot;
 
 $(document).ready(function () {
-    tableManager = new TableManager();
-    tableManager.init();
+    initAll();
+});
 
+function initAll() {
+
+    initScatterPlot();
+    initMonthsSelects();
+    initShiftKeyListener();
+    initFilterChanges();
+    initTableManager();
+    getJsonData();
+}
+
+function initScatterPlot() {
     $.getJSON("php/get_data_for_scatterplot.php", function (result) {
-        var scatterPlot = new ScatterPlot(result);
+        scatterPlot = new ScatterPlot(result);
         scatterPlot.init();
     });
+}
 
-    getJsonData();
+function initTableManager() {
+    tableManager = new TableManager();
+    tableManager.init();
+}
 
+function initFilterChanges() {
+    $("input[name=planned]").on("change", function change() {
+        getJsonData();
+    });
+
+    $('#markFilter').change(function () {
+        getJsonData();
+    });
+}
+
+function initShiftKeyListener() {
     $(window).keydown(function (evt) {
         if (evt.which == 16) {
             shiftPressed = true;
@@ -22,20 +49,32 @@ $(document).ready(function () {
             shiftPressed = false;
         }
     });
+}
 
-    $("input[name=planned]").on("change", function change() {
-        getJsonData();
+function initMonthsSelects() {
+    $('#fromMonth').change(function () {
+        var fromMonthValue = $(this).val();
+        var toMonth = $('#toMonth');
+        if (fromMonthValue > toMonth.val()) {
+            toMonth.val(fromMonthValue);
+        }
+        scatterPlot.recreateAsterPlotIfAlreadyExists();
     });
 
-    $('#markFilter').change(function () {
-        getJsonData();
-    });
+    $('#toMonth').change(function () {
+        var toMonthValue = $(this).val();
+        var fromMonth = $('#fromMonth');
+        if (toMonthValue < fromMonth.val()) {
+            fromMonth.val(toMonthValue);
+        }
 
-});
+        scatterPlot.recreateAsterPlotIfAlreadyExists();
+    });
+}
 
 function getJsonData() {
     tableManager.clearData();
-    $("#results").html("");
+    $("#chartResults").html("");
     var plannedType = $("[name=planned]:checked").val();
     var markType = $('#markFilter').find("option:selected").attr('value');
 
@@ -45,8 +84,9 @@ function getJsonData() {
         eventSeriesVisualization = new EventSeriesVisualization(result, plannedType, markType);
         eventSeriesVisualization.init();
     });
-}
 
+
+}
 
 Date.prototype.toStringFormat = function () {
     var day = this.getDate();
@@ -62,10 +102,4 @@ Date.prototype.toStringFormat = function () {
     }
 
     return year + '-' + month + '-' + day;
-};
-
-Array.prototype.remove = function (from, to) {
-    var rest = this.slice((to || from) + 1 || this.length);
-    this.length = from < 0 ? this.length + from : from;
-    return this.push.apply(this, rest);
 };

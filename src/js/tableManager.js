@@ -3,7 +3,7 @@ function TableManager() {
     var _this = this;
 
     TableManager.prototype.init = function () {
-        _this.table = $('#example').DataTable({
+        _this.table = $('#tableData').DataTable({
             "scrollY": "200px",
             "scrollCollapse": true,
             "paging": false,
@@ -20,5 +20,4 @@ function TableManager() {
     TableManager.prototype.clearData = function() {
         _this.table.clear().draw();
     }
-
 }
