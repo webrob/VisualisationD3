@@ -10,6 +10,7 @@ The project uses:
      <li>D3js </li>
 </ul>
 
-Working version can be seen <a href="http://users.ecs.soton.ac.uk/rpr1d14/src/">here</a>
+Working version can be found <a href="http://users.ecs.soton.ac.uk/rpr1d14/src/">here</a>
+and video showing the usage <a href="https://www.youtube.com/watch?v=tUkEsuALHdg">here</a>.
 
 
